@@ -1,25 +1,13 @@
-<!DOCTYPE html>
 <head lang="en">
     <meta charset="UTF-8">
     <title>Simple co-browse with chat/cobrowse reconnect example</title>
 </head>
 <body>
 
-    <h1>Simple co-browse with chat/cobrowse reconnect example</h1>
-    <a href="/other-page.html">Test Navigation to other page on same domain</a>
-    <form>
-        <label for="firstName">First Name</label>
-        <input type="text" id="firstName" size="20" value="Joe" />
-
-        <label for="lastName">Last Name</label>
-        <input type="text" id="lastName" size="20" value="Customer" />
-
-        <button type="button" id="start-chat">Start Embedded Chat</button>
-
-    </form>
+    <h1>Co-browse page 2</h1>
+    <a href="/index.html">Back to start page</a>
     <div id="chatContainer" style="height:600px"></div>
 
-    <!-- Replace mypurecloud.com with the hostname for your PureCloud region -->
     <script id="purecloud-webchat-js" type="text/javascript" src="https://apps.mypurecloud.com/webchat/jsapi-v1.js" region="us-east-1" org-guid="cc329c9f-a78c-4788-8808-6fdf739234f7" deployment-key="da0ba755-efcc-4e93-958a-fea3dea65fb2"></script>
 
     <script type="text/javascript">
@@ -99,32 +87,19 @@
         return {
             startEmbeddedChat: function() {
                 let chatConfig = createChatConfig();
-                const startChatButton = document.querySelector("#start-chat");
-
                 ININ.webchat.create(chatConfig, function(err, webchat) {
                     if (err) {
                           console.error('Unable to share page', (err.stack || err));
                           return;
                       }
-                    if (webchat.isAutoJoined()) {
-                      console.log("Autojoined successfull");
-                      button.disabled = true;
-                    } else {
-                      //Render to frame
-                      console.log("No Autojoined")
-                      startChatButton.onclick = function() {
-                        return webchat.renderFrame({
-                            containerEl: 'chatContainer'
-                        });
-                      }
-                    }
+                    webchat.renderFrame({
+                        containerEl: 'chatContainer'
+                    });
                 });
             }
         }
     })();
     </script>
-    <script>
-        genesysWebchat.startEmbeddedChat();
-    </script>
-</body>
+    <script>genesysWebchat.startEmbeddedChat()</script>
+    </body>
 </html>
