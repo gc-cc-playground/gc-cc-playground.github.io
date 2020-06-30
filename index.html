@@ -7,6 +7,7 @@
 
     <h1>Simple co-browse with chat/cobrowse reconnect example</h1>
     <a href="/other-page.html">Test Navigation to other page on same domain</a>
+    <a href="https://spastorelli-genesys.github.io/">Test Navigation to page on another domain</a>
     <form>
         <label for="firstName">First Name</label>
         <input type="text" id="firstName" size="20" value="Joe" />
@@ -82,7 +83,10 @@
                 "reconnectEnabled": true,
 
                 //Allowed reconnect origins
-                "reconnectOrigins": ["https://gc-cc-playground.github.io"],
+                "reconnectOrigins": [
+                    "https://gc-cc-playground.github.io",
+                    "https://spastorelli-genesys.github.io"
+                ],
 
                 // Custom style applied to the chat window
                 "css": {
