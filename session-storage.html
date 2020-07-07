@@ -5,27 +5,34 @@
 </head>
 <body>
 <input type="text" id="field"></input>
-<div id="error"></div>
+<div id="test-result"></div>
 <script>
     // Get the text field that we're going to track
     let field = document.getElementById("field");
-    let errorField = document.getElementById("error");
-    
+    let result = document.getElementById("test-result");
+    let supported = false;
     try {
-    // See if we have an autosave value
-    // (this will only happen if the page is accidentally refreshed)
-    if (sessionStorage.getItem("autosave")) {
-        // Restore the contents of the text field
-        field.value = sessionStorage.getItem("autosave");
-    }
-    
-    // Listen for changes in the text field
-    field.addEventListener("change", function() {
-        // And save the results into the session storage object
-        sessionStorage.setItem("autosave", field.value);
-    });
+        storage = window['sessionStorage'];
+        var x = '__storage_test__';
+        storage.setItem(x, x);
+        storage.removeItem(x);
+        result.value = "session storage should be supported"
+        supported = true;
     } catch (e) {
-        errorField.value = JSON.stringify(e, null, 2);
+        result.value = JSON.stringify(e, null, 2);
+    }
+
+    if (supported) {
+        if (sessionStorage.getItem("autosave")) {
+            // Restore the contents of the text field
+            field.value = sessionStorage.getItem("autosave");
+        }
+        
+        // Listen for changes in the text field
+        field.addEventListener("change", function() {
+            // And save the results into the session storage object
+            sessionStorage.setItem("autosave", field.value);
+        });
     }
 </script>
 </body>
