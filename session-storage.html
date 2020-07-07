@@ -5,10 +5,13 @@
 </head>
 <body>
 <input type="text" id="field"></input>
+<div id="error"></div>
 <script>
     // Get the text field that we're going to track
     let field = document.getElementById("field");
+    let errorField = document.getElementById("error");
     
+    try {
     // See if we have an autosave value
     // (this will only happen if the page is accidentally refreshed)
     if (sessionStorage.getItem("autosave")) {
@@ -21,5 +24,8 @@
         // And save the results into the session storage object
         sessionStorage.setItem("autosave", field.value);
     });
+    } catch (e) {
+        errorField.value = JSON.stringify(e, null, 2);
+    }
 </script>
 </body>
