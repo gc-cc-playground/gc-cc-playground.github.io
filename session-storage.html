@@ -16,10 +16,10 @@
         var x = '__storage_test__';
         storage.setItem(x, x);
         storage.removeItem(x);
-        result.value = "session storage should be supported"
+        result.innerText = "session storage should be supported"
         supported = true;
     } catch (e) {
-        result.value = JSON.stringify(e, null, 2);
+        result.innerText = JSON.stringify(e, null, 2);
     }
 
     if (supported) {
